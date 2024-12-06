@@ -1,0 +1,65 @@
+consumes:
+- application/json
+- application/xml
+- application/gob
+- application/x-gob
+definitions:
+  Hotel:
+    description: Hotel media type (default view)
+    example:
+      id: 1234
+      name: Cititel Express Kota Kinabalu
+    properties:
+      id:
+        example: 1234
+        type: string
+      name:
+        example: Cititel Express Kota Kinabalu
+        type: string
+    required:
+    - id
+    - name
+    title: 'Mediatype identifier: hotel; view=default'
+    type: object
+  HotelCollection:
+    description: HotelCollection is the media type for an array of Hotel (default
+      view)
+    example:
+    - id: 1
+      name: Quam et ex magnam sint.
+    - id: 1
+      name: Quam et ex magnam sint.
+    items:
+      $ref: '#/definitions/Hotel'
+    title: 'Mediatype identifier: hotel; type=collection; view=default'
+    type: array
+host: localhost:8080
+info:
+  description: The best API ever!
+  title: Hotels API
+  version: ""
+paths:
+  /hotel/search:
+    get:
+      description: Search hotels
+      operationId: hotels#search
+      produces:
+      - hotel; type=collection
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/HotelCollection'
+      schemes:
+      - http
+      summary: search hotels
+      tags:
+      - hotels
+produces:
+- application/json
+- application/xml
+- application/gob
+- application/x-gob
+schemes:
+- http
+swagger: "2.0"
